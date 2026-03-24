@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Lang\LanguageController;
+use App\Livewire\Settings\Language;
 use Illuminate\Support\Facades\Route;
 use Laravel\Fortify\Features;
 use Livewire\Volt\Volt;
@@ -18,6 +20,10 @@ Route::middleware(['auth'])->group(function () {
     Volt::route('settings/profile', 'settings.profile')->name('profile.edit');
     Volt::route('settings/password', 'settings.password')->name('user-password.edit');
     Volt::route('settings/appearance', 'settings.appearance')->name('appearance.edit');
+    Route::get('settings/language', Language::class)->name('settings.language');
+
+    Route::post('settings/language/switch', [LanguageController::class, 'switch'])
+        ->name('settings.language.switch');
 
     Volt::route('settings/two-factor', 'settings.two-factor')
         ->middleware(
